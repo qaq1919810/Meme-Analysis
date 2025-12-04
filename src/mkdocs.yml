@@ -1,0 +1,82 @@
+site_name: Meme-Analysis
+site_url: https://qaq1919810.github.io/Meme-Analysis
+
+#GitHub图标
+repo_url: https://github.com/qaq1919810/Meme-Analysis
+repo_name: Meme-Analysis
+
+#注入css和js
+extra_css:
+  - assets/css/global.css
+extra_javascript:
+  - assets/js/global.js
+
+#顶栏排序
+nav:
+  - 首页: index.md
+  - 文档: Docs/重音テト正在录音黑调的低客.md
+theme:
+  name: material
+  features:
+    #顶栏选项
+    - navigation.tabs
+    #代码块复制选项
+    - content.code.copy
+    #章节合并
+    - toc.integrate
+  #深浅色主题
+  palette:
+    #第一种调色板：浅色模式（默认）
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换至深色模式
+    #第二种调色板：深色模式
+    - scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换至浅色模式
+
+markdown_extensions:
+  - attr_list
+
+plugins:
+  #搜索插件
+  - search:
+      lang:
+        - zh
+        - en
+        - ja
+  #多语言插件
+  - i18n:
+      docs_structure: folder
+      #所有语言的文件名都以中文版命名
+      fallback_to_default: true
+      languages:
+        - name: 中文
+          locale: zh
+          default: true
+          build: true
+        - name: English
+          locale: en
+          build: true
+          site_name: Meme-Analysis(en)
+          nav_translations:
+            首页: Home
+            文档: Docs
+        - name: 日本語
+          locale: ja
+          build: true
+          site_name: Meme-Analysis(ja)
+          nav_translations:
+            首页: ホーム
+            文档: ドキュメント
+
+#项目目录
+docs_dir: docs
+#输出目录
+site_dir: ../docs

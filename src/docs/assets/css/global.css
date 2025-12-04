@@ -1,0 +1,23 @@
+.md-footer {
+    display: none !important;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6,
+.md-typeset p {
+    margin: 0 !important;
+}
+
+/* 请保留 @keyframes flash */
+@keyframes flash {
+    0%, 100% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: skyblue;
+    }
+}
