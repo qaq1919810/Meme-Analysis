@@ -1,34 +1,44 @@
-/*
-    ANIMATION_DURATION_MS应为ANIMATION_STYLE的重复次数*每次时间例如
-    const ANIMATION_STYLE = 'flash 0.3s ease 3'
-    结果应为
-    const ANIMATION_DURATION_MS = (0.3*3)
- */
-const ANIMATION_DURATION_MS = 900
-const ANIMATION_STYLE = 'flash 0.3s ease 3'
-// 运行状态
+// 初始化动画状态
+let running = false
+
 window.addEventListener('hashchange', () => {
-    // 1. 获取当前 hash 对应的元素
+    // 获取当前 hash 对应的元素
     const targetId = location.hash.substring(1)
     const targetElement = document.getElementById(targetId)
 
-    // 2. 删除 hash，不刷新页面 (保持 URL 干净)
+    // 删除 hash，不刷新页面 (保持 URL 干净)
     history.replaceState(null, '', location.pathname + location.search)
 
+    // 判断动画状态
+    if(running)return
+
+    // 判断元素是否存在
     if (targetElement) {
-        targetElement.animate(
+        const ani = targetElement.animate(
             [
-                { backgroundColor: 'transparent' },       // 起始状态
-                { backgroundColor: 'skyblue', offset: 0.5 }, // 中间状态
-                { backgroundColor: 'transparent' }        // 结束状态
+                // 起始状态
+                { backgroundColor: 'transparent' },
+                // 中间状态
+                { backgroundColor: 'skyblue', offset: 0.5 },
+                // 结束状态
+                { backgroundColor: 'transparent' }
             ],
             {
                 // 单次动画时长 (ms)
                 duration: 300,
                 // 循环次数
                 iterations: 3,
+                // 动画类型
                 easing: 'ease'
             }
         )
+
+        // 标记动画状态
+        running = true
+
+        // 还原动画状态
+        ani.finished.finally(()=>{
+            running = false
+        })
     }
 })
