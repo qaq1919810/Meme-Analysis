@@ -10,18 +10,35 @@ window.addEventListener('hashchange', () => {
     history.replaceState(null, '', location.pathname + location.search)
 
     // 判断动画状态
-    if(running)return
+    if (running) return
 
     // 判断元素是否存在
     if (targetElement) {
+        // 获取主题深浅状态
+        const themeState = JSON.parse(localStorage.getItem("/Meme-Analysis/.__palette")).index
+
+        // 定义动画颜色
+        let animationColors
+        switch (themeState) {
+            case 0:
+                animationColors = "dodgerblue"
+                break
+            case 1:
+                animationColors = "skyblue"
+                break
+            default:
+                alert("请反馈bug，https://github.com/qaq1919810/Meme-Analysis/issues/new/choose")
+        }
+
+        // 创建执行动画
         const ani = targetElement.animate(
             [
                 // 起始状态
-                { backgroundColor: 'transparent' },
+                {backgroundColor: 'transparent'},
                 // 中间状态
-                { backgroundColor: 'skyblue', offset: 0.5 },
+                {backgroundColor: animationColors, offset: 0.5},
                 // 结束状态
-                { backgroundColor: 'transparent' }
+                {backgroundColor: 'transparent'}
             ],
             {
                 // 单次动画时长 (ms)
@@ -37,7 +54,7 @@ window.addEventListener('hashchange', () => {
         running = true
 
         // 还原动画状态
-        ani.finished.finally(()=>{
+        ani.finished.finally(() => {
             running = false
         })
     }
